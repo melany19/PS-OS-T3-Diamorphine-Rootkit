@@ -297,7 +297,6 @@ void
 module_show(void)
 {
     strncpy(THIS_MODULE->name, MODULE_NAME, sizeof(THIS_MODULE->name) - 1);
-    list_add(&THIS_MODULE->list, module_previous);
     module_hidden = 0;
 }
 
