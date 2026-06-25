@@ -50,20 +50,29 @@ make
 
 Load the module(as root)
 ```
-insmod diamorphine.ko
+sudo insmod diamorphine.ko
 ```
+
+Check the modules
+```
+lsmod | grep Oculto
+
+
+cat /proc/modules | grep Oculto
+```
+
 
 Uninstall
 --
 
 The module starts invisible, to remove you need to make it visible
 ```
-kill -63 0
+sudo kill -63 0
 ```
 
 Then remove the module(as root)
 ```
-rmmod diamorphine
+sudo rmmod diamorphine
 ```
 
 References
