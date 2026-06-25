@@ -35,7 +35,7 @@ Start proccess in Ubuntu victim:
 
 Clone the repository
 ```
-git clone https://github.com/m0nad/Diamorphine
+git clone https://github.com/melany19/PS-OS-T3-Diamorphine-Rootkit.git
 ```
 
 Enter the folder
